@@ -1,6 +1,3 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 
 const todoList = [
@@ -19,15 +16,13 @@ const todoList = [
 ];
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
       <h1>Todo-List</h1>
       <ul>
         {todoList.map((todo) => {
           return (
-            <li>{`${todo.id}) ${todo.title}`}</li>
+            <li key={todo.id}>{`${todo.title}`}</li>
           );
         })}
       </ul>
@@ -35,4 +30,4 @@ function App() {
   )
 }
 
-export default App
+export default App;
