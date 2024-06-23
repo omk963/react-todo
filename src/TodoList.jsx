@@ -15,13 +15,15 @@ const todoList = [
 
 const TodoList = () => {
     return (
-        <ul>
-        {todoList.map((todo) => {
-          return (
-            <li key={todo.id}>{`${todo.title}`}</li>
-          );
-        })}
-        </ul>
+        <>
+            <ul>
+            {todoList.map((todo) => {
+            return (
+                <li key={todo.id}>{`${todo.title}`}</li>
+            );
+            })}
+            </ul>
+        </>
     );
 };
 
