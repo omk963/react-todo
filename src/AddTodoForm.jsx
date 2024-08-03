@@ -10,6 +10,10 @@ const AddTodoForm = ({ onAddTodo }) => {
 
     const handleAddTodo = (event) => {
         event.preventDefault();
+        if(todoTitle === '') {
+            alert("Please enter a valid to-do item");
+            return;
+        }
         console.log(todoTitle);
         onAddTodo({
             title: todoTitle,
