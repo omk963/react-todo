@@ -1,6 +1,11 @@
-const TodoListItem = (props) => {
+import React from "react";
+
+const TodoListItem = ({todo, onRemoveTodo}) => {
     return (
-        <li>{props.todo.title}</li>
+        <React.Fragment>
+            <li>{todo.title}</li>
+            <button onClick={() => onRemoveTodo(todo.id)}>Remove</button>
+        </React.Fragment>
     );
 };
 
