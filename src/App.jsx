@@ -20,11 +20,37 @@ function App() {
     })
   }, [])
 
-  useEffect(() => {
-    if (!isLoading) {
-      localStorage.setItem('savedTodoList', JSON.stringify(todoList));
+  const fetchData = async () => {
+    const options = {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${import.meta.env.VITE_AIRTABLE_API_TOKEN}`
+      }
+    };
+    const url = `https://api.airtable.com/v0/${import.meta.env.VITE_AIRTABLE_BASE_ID}/${import.meta.env.VITE_TABLE_NAME}`;
+    try {
+      const response = await fetch(url, options);
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status}`);
+      }
+      const data = await response.json();
+      const todos = data.records.map((todo) => {
+        const newTodo = {
+          id: todo.id,
+          title: todo.fields.title
+        };
+        return newTodo;
+      });
+      setTodoList(todos);
+      setIsLoading(false);
+    } catch (err) {
+      console.error();
     }
-  }, [todoList, isLoading])
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, [todoList, isLoading]);
 
   const addTodo = (newTodo) => {
     setTodoList([...todoList, newTodo])
