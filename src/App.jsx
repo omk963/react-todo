@@ -34,10 +34,10 @@ function App() {
         throw new Error(`Error: ${response.status}`);
       }
       const data = await response.json();
-      const todos = data.records.map((arr) => {
+      const todos = data.records.map((todo) => {
         const newTodo = {
-          id: arr.id,
-          title: arr.fields.title
+          id: todo.id,
+          title: todo.fields.title
         };
         return newTodo;
       });
