@@ -65,8 +65,8 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route 
-        path='/'
+        <Route
+          path='/'
           element=
           {<React.Fragment>
             <h1>Todo-List</h1>
