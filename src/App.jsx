@@ -1,6 +1,7 @@
 import './App.css'
 import React from 'react';
 import { useState, useEffect } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import TodoList from './TodoList';
 import AddTodoForm from './AddTodoForm';
 
@@ -11,10 +12,10 @@ function App() {
   useEffect(() => {
     new Promise((resolve, reject) => {
       setTimeout(() => {
-        resolve({data: {todoList: JSON.parse(localStorage.getItem('savedTodoList')) || []}})
+        resolve({ data: { todoList: JSON.parse(localStorage.getItem('savedTodoList')) || [] } })
       }, 2000)
     }).then((result) => {
-      const {data} = result
+      const { data } = result
       setTodoList(data.todoList)
       setIsLoading(false)
     })
@@ -62,11 +63,25 @@ function App() {
   };
 
   return (
-    <React.Fragment>
-      <h1>Todo-List</h1>
-      <AddTodoForm onAddTodo={addTodo} />
-      {isLoading ? <p>Loading...</p> : <TodoList todoList={todoList} onRemoveTodo={removeTodo} />}
-    </React.Fragment>
+    <BrowserRouter>
+      <Routes>
+        <Route 
+        path='/'
+          element=
+          {<React.Fragment>
+            <h1>Todo-List</h1>
+            <AddTodoForm onAddTodo={addTodo} />
+            {isLoading ? <p>Loading...</p> : <TodoList todoList={todoList} onRemoveTodo={removeTodo} />}
+          </React.Fragment>}
+        />
+        <Route
+          path='/new'
+          element={
+            <h1>New Todo List</h1>
+          }
+        />
+      </Routes>
+    </BrowserRouter>
   );
 };
 
