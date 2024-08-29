@@ -1,8 +1,8 @@
 import style from './TodoListItem.module.css';
 
-const TodoListItem = (props) => {
+const TodoListItem = ({ todo }) => {
     return (
-        <li className={style.ListItem}>{props.todo.title}</li>
+        <li className={style.listItem}>{todo.title}</li>
     );
 };
 

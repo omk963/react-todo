@@ -1,34 +1,31 @@
-.ListItem {
+.listItem {
     color: rgb(255, 255, 255);
-    list-style-image: url('./assets/fish.svg');
+    list-style-image: url('.././assets/fish.svg');
     font-size: larger;
     font-weight: bold;
-    text-shadow: rgb(255, 148, 148) 1px 0 10px;
+    text-shadow: rgb(255, 148, 148) 1px 0 10px;    
 }
 
-.Title {
+.title {
     margin-right: 2em;
 }
 
-.Todo {
+.todo {
     border-radius: 15px;
     background-color: rgb(198, 255, 255);
     border: 1px solid rgb(120, 190, 255);
     padding: 5px 10px
 }
 
-.AddBtn {
+.addBtn {
     border-radius: 75%;
     margin-left: 1em;
     background-color: aquamarine;
     border: none;
 }
 
-.AddBtn:hover {
+.addBtn:hover {
     background-color: rgb(236, 236, 236);
     border: none;
 }
 
-.Background {
-    background-image: url('./assets/oceanbg.jpg');
-}

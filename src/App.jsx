@@ -9,18 +9,6 @@ function App() {
   const [todoList, setTodoList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve({ data: { todoList: JSON.parse(localStorage.getItem('savedTodoList')) || [] } })
-      }, 2000)
-    }).then((result) => {
-      const { data } = result
-      setTodoList(data.todoList)
-      setIsLoading(false)
-    })
-  }, [])
-
   const fetchData = async () => {
     const options = {
       method: 'GET',

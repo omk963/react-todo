@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import style from './TodoListItem.module.css'
+import style from './TodoListItem/TodoListItem.module.css'
 
 const AddTodoForm = ({ onAddTodo }) => {
     const [todoTitle, setTodoTitle] = useState('');
@@ -21,10 +21,10 @@ const AddTodoForm = ({ onAddTodo }) => {
 
     return (
         <form onSubmit={handleAddTodo}>
-            <label className={style.Title}>Title</label>
-            <input className={style.Todo} id='todoTitle' type='text' name='title' value={todoTitle} onChange={handleTitleChange} />
+            <label className={style.title}>Title</label>
+            <input className={style.todo} id='todoTitle' type='text' name='title' value={todoTitle} onChange={handleTitleChange} />
             <label htmlFor="todoTitle"></label>
-            <button type="submit" className={style.AddBtn}>Add</button>
+            <button type="submit" className={style.addBtn}>Add</button>
         </form>
     );
 };
