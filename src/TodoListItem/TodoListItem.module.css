@@ -6,6 +6,14 @@
     text-shadow: rgb(255, 148, 148) 1px 0 10px;    
 }
 
+.deleteBtn {
+    margin: 0;
+    padding-left: 0 1em;
+    color: red;
+    font-weight: bold;
+    background-color: transparent;
+}
+
 .title {
     margin-right: 2em;
 }

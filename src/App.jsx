@@ -2,12 +2,11 @@ import './App.css'
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import TodoList from './TodoList';
+import TodoList from './TodoList/TodoList';
 import AddTodoForm from './AddTodoForm';
 
 function App() {
   const [todoList, setTodoList] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
 
   const fetchData = async () => {
     const options = {
@@ -31,7 +30,6 @@ function App() {
         return newTodo;
       });
       setTodoList(todos);
-      setIsLoading(false);
     } catch (err) {
       console.error();
     }
@@ -39,7 +37,7 @@ function App() {
 
   useEffect(() => {
     fetchData();
-  }, [todoList, isLoading]);
+  }, [todoList]);
 
   const addTodo = (newTodo) => {
     setTodoList([...todoList, newTodo])
@@ -59,7 +57,7 @@ function App() {
           {<React.Fragment>
             <h1>Todo-List</h1>
             <AddTodoForm onAddTodo={addTodo} />
-            {isLoading ? <p>Loading...</p> : <TodoList todoList={todoList} onRemoveTodo={removeTodo} />}
+            <TodoList todoList={todoList} onRemoveTodo={removeTodo} />
           </React.Fragment>}
         />
         <Route
