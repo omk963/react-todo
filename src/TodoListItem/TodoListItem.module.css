@@ -1,0 +1,46 @@
+.listItem {
+    color: rgb(255, 255, 255);
+    list-style-image: url('.././assets/fish.svg');
+    font-size: larger;
+    font-weight: bold;
+    text-shadow: rgb(255, 148, 148) 1px 0 10px;    
+}
+
+.deleteBtn {
+    margin: 0;
+    padding-left: 0 1em;
+    color: red;
+    font-weight: 900;
+    background-color: transparent;
+    border: none;
+    transition: transform .2s;
+}
+
+.deleteBtn:hover {
+    border: none;
+    transform: scale(1.2);
+}
+
+.title {
+    margin-right: 2em;
+}
+
+.todo {
+    border-radius: 15px;
+    background-color: rgb(198, 255, 255);
+    border: 1px solid rgb(120, 190, 255);
+    padding: 5px 10px
+}
+
+.addBtn {
+    border-radius: 75%;
+    margin-left: 1em;
+    background-color: aquamarine;
+    border: none;
+}
+
+.addBtn:hover {
+    background-color: rgb(236, 236, 236);
+    border: none;
+}
+

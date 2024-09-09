@@ -2,24 +2,11 @@ import './App.css'
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import TodoList from './TodoList';
+import TodoList from './TodoList/TodoList';
 import AddTodoForm from './AddTodoForm';
 
 function App() {
   const [todoList, setTodoList] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve({ data: { todoList: JSON.parse(localStorage.getItem('savedTodoList')) || [] } })
-      }, 2000)
-    }).then((result) => {
-      const { data } = result
-      setTodoList(data.todoList)
-      setIsLoading(false)
-    })
-  }, [])
 
   const fetchData = async () => {
     const options = {
@@ -43,7 +30,6 @@ function App() {
         return newTodo;
       });
       setTodoList(todos);
-      setIsLoading(false);
     } catch (err) {
       console.error();
     }
@@ -51,27 +37,75 @@ function App() {
 
   useEffect(() => {
     fetchData();
-  }, [todoList, isLoading]);
+  }, []);
 
-  const addTodo = (newTodo) => {
-    setTodoList([...todoList, newTodo])
-  };
+  // const addTodo = (newTodo) => {
+  //   setTodoList([...todoList, newTodo])
+  // };
 
-  const removeTodo = (id) => {
-    const updatedList = todoList.filter(todo => todo.id !== id)
-    setTodoList(updatedList)
-  };
+  const addTodo = async (newTodoTitle) => {
+    try {
+      const options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${import.meta.env.VITE_AIRTABLE_API_TOKEN}`
+        },
+        body: JSON.stringify(newTodoTitle)
+      };
+      const url = `https://api.airtable.com/v0/${import.meta.env.VITE_AIRTABLE_BASE_ID}/${import.meta.env.VITE_TABLE_NAME}`;
+
+      const response = await fetch(url, options);
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status}`);
+      }
+      const data = await response.json();
+      const newTodo = {
+        id: data.id,
+        title: data.fields.title
+      }
+      setTodoList(prevList => [...prevList, newTodo]);
+    } catch (err) {
+      console.error('Error:', err.message);
+    }
+  }
+
+  // const removeTodo = (id) => {
+  //   const updatedList = todoList.filter(todo => todo.id !== id)
+  //   setTodoList(updatedList)
+  // };
+
+  const removeTodo = async (id) => {
+    try {
+      const options = {
+        method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${import.meta.env.VITE_AIRTABLE_API_TOKEN}`
+        }
+      };
+      const url = `https://api.airtable.com/v0/${import.meta.env.VITE_AIRTABLE_BASE_ID}/${import.meta.env.VITE_TABLE_NAME}/${id}`;
+
+      const response = await fetch(url, options);
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status}`);
+      }
+      const updatedList = todoList.filter(todo => todo.id !== id);
+      setTodoList(updatedList);
+    } catch (err) {
+      console.error('Error:', err.message);
+    }
+  }
 
   return (
     <BrowserRouter>
       <Routes>
-        <Route 
-        path='/'
+        <Route
+          path='/'
           element=
           {<React.Fragment>
             <h1>Todo-List</h1>
             <AddTodoForm onAddTodo={addTodo} />
-            {isLoading ? <p>Loading...</p> : <TodoList todoList={todoList} onRemoveTodo={removeTodo} />}
+            <TodoList todoList={todoList} onRemoveTodo={removeTodo} />
           </React.Fragment>}
         />
         <Route

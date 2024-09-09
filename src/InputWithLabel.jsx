@@ -1,5 +1,6 @@
 import React from "react";
 import { useRef, useEffect } from "react";
+import style from './TodoListItem/TodoListItem.module.css'
 
 const InputWithLabel = ({ id, children, value, onInputChange }) => {
     const inputRef = useRef();
@@ -10,8 +11,15 @@ const InputWithLabel = ({ id, children, value, onInputChange }) => {
 
     return (
         <React.Fragment>
-            <label>{children}</label>
-            <input id={id} type='text' name={children} value={value} onChange={onInputChange} ref={inputRef} />
+            <label className={style.title}>{children}</label>
+            <input 
+                className={style.todo} 
+                id={id} type='text' 
+                name={children} 
+                value={value} 
+                onChange={onInputChange} 
+                ref={inputRef} 
+            />
             <label htmlFor={id}></label>
         </React.Fragment>
     );
