@@ -2,8 +2,8 @@ import './App.css'
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import TodoList from './TodoList/TodoList';
-import AddTodoForm from './AddTodoForm';
+import TodoList from './components/TodoList/TodoList';
+import AddTodoForm from './components/AddTodoForm';
 
 function App() {
   const [todoList, setTodoList] = useState([]);
