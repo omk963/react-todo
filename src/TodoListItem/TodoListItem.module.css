@@ -10,8 +10,15 @@
     margin: 0;
     padding-left: 0 1em;
     color: red;
-    font-weight: bold;
+    font-weight: 900;
     background-color: transparent;
+    border: none;
+    transition: transform .2s;
+}
+
+.deleteBtn:hover {
+    border: none;
+    transform: scale(1.2);
 }
 
 .title {
