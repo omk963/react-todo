@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import AddTodoForm from './AddTodoForm';
 import PropTypes from 'prop-types';
 import TodoList from './TodoList/TodoList';
+import style from './TodoContainer.module.css'
 
 const TodoContainer = ({ tableName }) => {
     const [todoList, setTodoList] = useState([]);
@@ -33,11 +34,16 @@ const TodoContainer = ({ tableName }) => {
                 };
                 return newTodo;
             });
-            setTodoList(todos.sort((a, b) => a.title.localeCompare(b.title)));
+            setTodoList(todos);
             setIsLoading(false);
         } catch (err) {
             console.error('Error:', err.message);
         }
+    };
+
+    const sortList = () => {
+        const sortedTodos = [...todoList].sort((a, b) => a.title.localeCompare(b.title));
+        setTodoList(sortedTodos);
     };
 
     const addTodo = async (newTodoTitle) => {
@@ -63,7 +69,7 @@ const TodoContainer = ({ tableName }) => {
             }
             setTodoList(prevList => {
                 const updatedList = [...prevList, newTodo];
-                updatedList.sort((a, b) => a.title.localeCompare(b.title));
+                // updatedList.sort((a, b) => a.title.localeCompare(b.title));
                 return updatedList;
             });
         } catch (err) {
@@ -97,7 +103,10 @@ const TodoContainer = ({ tableName }) => {
     return (
         <>
             <h1>{tableName}</h1>
-            <AddTodoForm onAddTodo={addTodo} />
+            <div className={style.input}>
+                <AddTodoForm onAddTodo={addTodo} />
+                <button onClick={sortList} className={style.sortBtn}>Sort</button>
+            </div>
             {isLoading ? <p>Loading...</p> : <TodoList todoList={todoList} onRemoveTodo={removeTodo} />}
         </>
     );

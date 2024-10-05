@@ -33,7 +33,7 @@
 
 .addBtn {
     border-radius: 75%;
-    margin-left: 1em;
+    margin-left: 2em;
     background-color: aquamarine;
     border: none;
 }
@@ -41,4 +41,8 @@
 .addBtn:hover {
     background-color: rgb(236, 236, 236);
     border: none;
+}
+
+.titleForm {
+    width: 200%;
 }
