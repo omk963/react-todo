@@ -11,12 +11,9 @@ function App() {
         <Route
           path='/new'
           element=
-          {<React.Fragment>
+          {
             <TodoContainer tableName={import.meta.env.VITE_TABLE_NAME} />
-            {/* <h1>Todo-List</h1>
-            <AddTodoForm onAddTodo={addTodo} />
-            <TodoList todoList={todoList} onRemoveTodo={removeTodo} /> */}
-          </React.Fragment>}
+          }
         />
         <Route
           path='/'

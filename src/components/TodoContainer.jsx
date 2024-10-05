@@ -8,6 +8,10 @@ const TodoContainer = ({ tableName }) => {
     const [todoList, setTodoList] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
+    useEffect(() => {
+        fetchData();
+    }, [tableName]);
+
     const fetchData = async () => {
         const options = {
             method: 'GET',
@@ -32,13 +36,9 @@ const TodoContainer = ({ tableName }) => {
             setTodoList(todos.sort((a, b) => a.title.localeCompare(b.title)));
             setIsLoading(false);
         } catch (err) {
-            console.error();
+            console.error('Error:', err.message);
         }
     };
-
-    useEffect(() => {
-        fetchData();
-    }, []);
 
     const addTodo = async (newTodoTitle) => {
         try {
@@ -50,7 +50,7 @@ const TodoContainer = ({ tableName }) => {
                 },
                 body: JSON.stringify(newTodoTitle)
             };
-            const url = `https://api.airtable.com/v0/${import.meta.env.VITE_AIRTABLE_BASE_ID}/${import.meta.env.VITE_TABLE_NAME}`;
+            const url = `https://api.airtable.com/v0/${import.meta.env.VITE_AIRTABLE_BASE_ID}/${tableName}`;
 
             const response = await fetch(url, options);
             if (!response.ok) {
@@ -79,7 +79,7 @@ const TodoContainer = ({ tableName }) => {
                     Authorization: `Bearer ${import.meta.env.VITE_AIRTABLE_API_TOKEN}`
                 }
             };
-            const url = `https://api.airtable.com/v0/${import.meta.env.VITE_AIRTABLE_BASE_ID}/${import.meta.env.VITE_TABLE_NAME}/${id}`;
+            const url = `https://api.airtable.com/v0/${import.meta.env.VITE_AIRTABLE_BASE_ID}/${tableName}/${id}`;
 
             const response = await fetch(url, options);
             if (!response.ok) {
