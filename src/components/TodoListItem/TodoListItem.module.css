@@ -1,15 +1,14 @@
 .listItem {
     color: rgb(255, 255, 255);
-    list-style-image: url('.././assets/fish.svg');
+    list-style-image: url('../../assets/fish.svg');
     font-size: larger;
     font-weight: bold;
-    text-shadow: rgb(255, 148, 148) 1px 0 10px;    
+    text-shadow: rgb(255, 148, 148) 1px 0 10px;
 }
 
 .deleteBtn {
     margin: 0;
-    padding-left: 0 1em;
-    color: red;
+    padding: 0.5em 0;
     font-weight: 900;
     background-color: transparent;
     border: none;
@@ -34,7 +33,7 @@
 
 .addBtn {
     border-radius: 75%;
-    margin-left: 1em;
+    margin-left: 2em;
     background-color: aquamarine;
     border: none;
 }
@@ -44,3 +43,6 @@
     border: none;
 }
 
+.titleForm {
+    width: 200%;
+}
